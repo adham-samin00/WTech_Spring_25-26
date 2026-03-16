@@ -10,7 +10,8 @@ function getQuantity()
     if(quantity === "" || quantity < 0)
     {
         quantity = 0;
-        alert("You should select a valid quantity.");
+        document.getElementById("quantity").value = quantity;
+        alert("Please enter a valid quantity (non-negative number).");
     }
 
     return quantity;
