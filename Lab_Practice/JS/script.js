@@ -11,14 +11,14 @@ a.map((item, index)=>{
 function get_name()
 {
     let paname = document.getElementById("PatientName").value;
-    document.getElementById("paname").style.color="red";
+    document.getElementById("paname");
     console.log(paname);
     return false;
 }
 function get_age()
 {
     let page= document.getElementById("Age").value;
-    document.getElementById("page").style.color="red";
+    document.getElementById("page");
     console.log(page);
     return false;
 }
