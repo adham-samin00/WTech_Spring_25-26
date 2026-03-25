@@ -8,11 +8,11 @@ function analyzeText()
     let word = text.split(" ");
     let wordCount = word.length;
 
-
+    let reverseText = text.split("").reverse().join("");    
 
 
     result.innerHTML = 
     "Number of characters: " + charCount + "<br>" +
-    "Total Words: " + wordCount + "<br>";
-    
+    "Total Words: " + wordCount + "<br>" +
+    "Reversed Text: " + reverseText;
 }
