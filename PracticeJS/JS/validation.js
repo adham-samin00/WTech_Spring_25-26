@@ -12,5 +12,7 @@ function analyzeText()
 
 
     result.innerHTML = 
-    "Number of characters: " + charCount;
+    "Number of characters: " + charCount + "<br>" +
+    "Total Words: " + wordCount + "<br>";
+    
 }
