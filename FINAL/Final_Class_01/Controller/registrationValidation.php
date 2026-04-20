@@ -38,8 +38,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
             {
                 $emailErr = "Invalid email format";
             }
-
-
+        
+        if(empty($address))
+            {
+                $addressErr = "Address field is required";
+            }
     }
 
 

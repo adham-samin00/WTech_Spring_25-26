@@ -36,7 +36,10 @@ include "../Controller/registrationValidation.php";
 
             <tr>
                 <td> <label for = "address"> Address: </label> </td>
-                <td> <textarea id = "address" name = "address" rows = "4" cols = "30"> </textarea> <?php echo $address ?></td>
+                <td> 
+                    <textarea id = "address" name = "address" rows = "4" cols = "30"> </textarea> <?php echo $address ?>
+                    <p style = "color:red"> <?php echo $addressErr ?> </p>
+                </td>
                 <td> <p style = "color:red">*</p> </td>
             </tr>
             
