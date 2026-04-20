@@ -33,21 +33,28 @@ include "../Controller/registrationValidation.php";
                 <td> <p style = "color:red">*</p> </td>
             </tr>
 
+            <tr>
+                <td> <label for = "website"> Website: </label> </td>
+                <td> 
+                    <input type = "text" id = "website" name = "website"> <?php echo $website?> 
+                    <p style = "color:red"> <?php echo $websiteErr ?> </p>
+                </td>
+            </tr>
+
 
             <tr>
-                <td> <label for = "address"> Address: </label> </td>
+                <td> <label for = "address"> Comment: </label> </td>
                 <td> 
                     <textarea id = "address" name = "address" rows = "4" cols = "30"> </textarea> <?php echo $address ?>
                     <p style = "color:red"> <?php echo $addressErr ?> </p>
                 </td>
-                <td> <p style = "color:red">*</p> </td>
             </tr>
             
 
             <tr>
                 <td> <label for = "gender"> Gender: </label> </td>
                 <td> <input type = "radio" id = "male" name = "gender"> <label for = "male">Male</label> </td>
-                <td> <input type = "radio" id = "female" name = "gender"> <label for = "female">Female</label> <?php echo $gender ?> </td>
+                <td> <input type = "radio" id = "female" name = "gender"> <label for = "female">Female</label></td>
                 <td> <p style = "color:red">*</p> </td>
             </tr>
 

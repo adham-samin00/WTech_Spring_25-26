@@ -4,11 +4,14 @@ $name = "";
 $email = "";
 $address = "";
 $gender = "";
+$website = "";
+
 
 $nameErr = "";
 $emailErr = "";
 $addressErr = "";
 $genderErr = "";
+$websiteErr = "";
 
 
 
@@ -16,8 +19,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
     {
         $name = $_POST["name"];
         $email = $_POST["email"];
+        $website = $_POST["website"];
         $address = $_POST["address"];
         $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
+
     
 
 
@@ -39,10 +44,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
                 $emailErr = "Invalid email format";
             }
         
-        if(empty($address))
-            {
-                $addressErr = "Address field is required";
-            }
+
+
     }
 
 
