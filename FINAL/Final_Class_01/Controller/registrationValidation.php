@@ -25,36 +25,66 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
         $comment = isset($_REQUEST["comment"]) ? $_REQUEST["comment"] : "";
         $gender = isset($_REQUEST["gender"]) ? $_REQUEST["gender"] : "";
 
+        $flag = false;
+
         if(empty($name))
             {
                 $nameErr = "Name is required";
+                $flag = true;
             }
         else if(!preg_match("/^[a-zA-Z ]*$/", $name))
             {
                 $nameErr = "Only letters and white spaces are allowed";
+                $flag = true;
             }
 
-        if(empty($email))
+        else if(empty($email))
             {
                 $emailErr = "E-mail is required";
+                $flag = true;
             }
         else if(!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $email))
             {
                 $emailErr = "Invalid e-mail format";
+                $flag = true;
             }
 
-        if(!empty($website))
+        else if(!empty($website))
             {
                 if(!preg_match("/\b((https?:\/\/)?[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(\/[a-zA-Z0-9#]+\/?)*)(\/)?\b/", $website))
                     {
                         $websiteErr = "Invalid URL";
+                        $flag = true;
                     }
             }
 
-        if(empty($gender))
+        else if(empty($gender))
             {
                 $genderErr = "Gender is required";
+                $flag = true;
             }
+
+        if($flag !== false)
+            {
+                $_SESSION["name"] = $name;
+                setcookie('name', $name, time()+3600, "/")
+                echo "Login Successful";
+            }
+            else
+                {
+                    echo "Please try again!";
+                }
+        
+                if(isset($_SESSION["name"]) || isset($_COOKIE["name"]))
+                {
+                    echo "Welcome Back";
+                }
+            else{
+                    echo "pLease log in agian!"; 
+                }
+            
+        
+        
     }
 
 ?>
