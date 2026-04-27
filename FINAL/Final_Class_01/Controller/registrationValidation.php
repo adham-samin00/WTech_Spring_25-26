@@ -115,6 +115,23 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
             $data = file_get_contents($datafile);
             $mydata = json_decode($data);
 
+            if($file)
+                {
+                    $targetdirectory = "../File/";
+                    $path = $targetdirectory.basename($file["name"]);
+                    $result = move_uploaded_file($file["tmp_name"],$path);
+                }
+            
+                else
+                    {
+                        $path = "";
+                    }
+
+            
+            $database = new db();
+            $connection = $database->connection();
+            $result = $database->signup($connection, "information", $name, $email, $password, $website, $comment, $gender, $filePath);
+
     } 
     else {
         echo "Please try again!";
