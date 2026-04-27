@@ -1,10 +1,13 @@
 <?php
 
+session_start();
+
 $name = "";
 $email = "";
 $website = "";
 $comment = "";
 $gender = "";
+$datafile = "../data.json";
 
 $nameErr = "";
 $emailErr = "";
@@ -38,7 +41,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
                 $flag = true;
             }
 
-        else if(empty($email))
+        if(empty($email))
             {
                 $emailErr = "E-mail is required";
                 $flag = true;
@@ -49,7 +52,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
                 $flag = true;
             }
 
-        else if(!empty($website))
+        if(!empty($website))
             {
                 if(!preg_match("/\b((https?:\/\/)?[a-zA-Z0-9-]+\.[a-zA-Z]{2,}(\/[a-zA-Z0-9#]+\/?)*)(\/)?\b/", $website))
                     {
@@ -58,33 +61,60 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
                     }
             }
 
-        else if(empty($gender))
+        if(empty($gender))
             {
                 $genderErr = "Gender is required";
                 $flag = true;
             }
 
-        if($flag !== false)
+    if ($flag === false) {
+        $_SESSION["name"] = $name;
+        setcookie('name', $name, time() + 3600, "/");
+        echo "Login Successful";
+
+        $formdata = array("Name: " => $name, "Email: " => $email, "Website: " => $website, "Comment: " => $comment, "Gender: " => $gender);
+
+        if(file_exists($datafile))
             {
-                $_SESSION["name"] = $name;
-                setcookie('name', $name, time()+3600, "/")
-                echo "Login Successful";
+                $existdata = file_get_contents($datafile);
+                $tempdata = json_decode($existdata, true);
             }
             else
                 {
-                    echo "Please try again!";
+                    $tempdata = array();
                 }
+        if(!is_array($tempdata))
+            {
+                $tempdata = array();
+            }
         
-                if(isset($_SESSION["name"]) || isset($_COOKIE["name"]))
+            $tempdata [] = $formdata;
+            $jsondata = json_encode($tempdata, JSON_PRETTY_PRINT);
+        
+        if(file_put_contents($datafile, $jsondata) !== false)
+            {
+                echo "Data Saved";
+            }
+            else
                 {
-                    echo "Welcome Back";
-                }
-            else{
-                    echo "pLease log in agian!"; 
+                    echo "Please try again";
                 }
             
-        
-        
+            $data = file_get_contents($datafile);
+            $mydata = json_decode($data);
+
+    } 
+    else {
+        echo "Please try again!";
+    }
+
+    if (isset($_SESSION["name"]) || isset($_COOKIE["name"])) {
+        echo " Welcome Back";
+    } 
+    else {
+        echo " Please log in again!";
+    }
+
     }
 
 ?>
