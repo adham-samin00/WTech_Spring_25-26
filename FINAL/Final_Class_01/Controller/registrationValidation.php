@@ -1,32 +1,33 @@
 <?php
 
+include "../Model/db.php";
 session_start();
 
 $name = "";
 $email = "";
+$password = "";
 $website = "";
 $comment = "";
 $gender = "";
+$filePath = "";
 $datafile = "../data.json";
 
 $nameErr = "";
 $emailErr = "";
+$passwordErr = "";
 $websiteErr = "";
 $genderErr = "";
+$fileErr = "";
 
 if($_SERVER["REQUEST_METHOD"]=="POST")
     {
-        $name = isset($_POST["name"]) ? $_POST["name"] : "";
-        $email = isset($_POST["email"]) ? $_POST["email"] : "";
-        $website = isset($_POST["website"]) ? $_POST["website"] : "";
-        $comment = isset($_POST["comment"]) ? $_POST["comment"] : "";
+        $name = isset($_POST["name"]) ? trim($_POST["name"]) : "";
+        $email = isset($_POST["email"]) ? trim($_POST["email"]) : "";
+        $password = isset($_POST["password"]) ? $_POST["password"] : "";
+        $website = isset($_POST["website"]) ? trim($_POST["website"]) : "";
+        $comment = isset($_POST["comment"]) ? trim($_POST["comment"]) : "";
         $gender = isset($_POST["gender"]) ? $_POST["gender"] : "";
-
-        $name = isset($_REQUEST["name"]) ? $_REQUEST["name"] : "";
-        $email = isset($_REQUEST["email"]) ? $_REQUEST["email"] : "";
-        $website = isset($_REQUEST["website"]) ? $_REQUEST["website"] : "";
-        $comment = isset($_REQUEST["comment"]) ? $_REQUEST["comment"] : "";
-        $gender = isset($_REQUEST["gender"]) ? $_REQUEST["gender"] : "";
+        $file = isset($_FILES["file"]) ? $_FILES["file"] : null;
 
         $flag = false;
 
@@ -49,6 +50,17 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
         else if(!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $email))
             {
                 $emailErr = "Invalid e-mail format";
+                $flag = true;
+            }
+
+        if(empty($password))
+            {
+                $passwordErr = "Password is required";
+                $flag = true;
+            }
+        else if(strlen($password) < 8)
+            {
+                $passwordErr = "Password must be at least 8 characters";
                 $flag = true;
             }
 

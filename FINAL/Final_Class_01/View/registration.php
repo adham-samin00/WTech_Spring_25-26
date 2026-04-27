@@ -8,7 +8,7 @@ include "../Controller/registrationValidation.php";
         <title>Registration Form</title>
     </head>
     <body>
-        <form method="post" action="">
+        <form method="post" action="" enctype="multipart/form-data">
             <table>
                 <tr>
                     <td><p style='color: red'> * Required Field </p></td><br>
@@ -23,6 +23,12 @@ include "../Controller/registrationValidation.php";
                 <tr>
                     <td><label for="email">E-mail:</label></td>
                     <td><input type="text" id="email" name="email" <?php echo $email; ?>> <span style = "color:red"> <?php echo $emailErr?> </span> </td>
+                    <td><p style='color: red'>*</p></td>
+                </tr>
+
+                <tr>
+                    <td><label for="password">Password:</label></td>
+                    <td><input type="password" id="password" name="password"> <span style="color:red"> <?php echo $passwordErr?> </span> </td>
                     <td><p style='color: red'>*</p></td>
                 </tr>
 
@@ -47,6 +53,12 @@ include "../Controller/registrationValidation.php";
                         <?php echo $genderErr; ?>
 
                     </td>
+                    <td><p style='color: red'>*</p></td>
+                </tr>
+
+                <tr>
+                    <td><label for="profile_file">Upload File:</label></td>
+                    <td><input type="file" id="profile_file" name="profile_file"> <span style="color:red"> <?php echo $fileErr?> </span></td>
                     <td><p style='color: red'>*</p></td>
                 </tr>
 
